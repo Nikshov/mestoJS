@@ -32,7 +32,7 @@ function editSubmit(evt) {
   profileName.textContent = inputName.value;
   profileAbout.textContent = inputAbout.value;
 
-  popupClose()
+  popupClosed()
 }
 
 
