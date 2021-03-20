@@ -1,0 +1,8 @@
+.profile__info {
+  max-width: 336px;
+  display: grid;
+  grid-template-areas: 'name edit'
+                       'about  . ';
+  align-items: baseline;
+  margin-left: 30px;
+}
