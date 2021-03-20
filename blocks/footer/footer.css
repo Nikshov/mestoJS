@@ -5,3 +5,22 @@
   justify-content: flex-start;
   align-content: center;
 }
+
+@media screen and (max-width: 980px) {
+  .footer {
+    max-width: 581px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .footer {
+    max-width: 282px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .footer {
+    max-width: 282px;
+    margin: 0 19px 36px;
+  }
+}

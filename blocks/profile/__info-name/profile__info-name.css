@@ -1,11 +1,19 @@
 .profile__info-name {
-  grid-area: name;
   font-weight: 500;
   font-size: 42px;
-  line-height: 94%;
-  margin: 0 0 16px 0;
+  line-height: 48px;
+  margin: 0;
+  padding: 0;
   max-width: 294px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+
+@media screen and (max-width: 320px) {
+  .profile__info-name {
+    max-width: 189px;
+    font-size: 27px;
+    line-height: 33px;
+  }
 }
