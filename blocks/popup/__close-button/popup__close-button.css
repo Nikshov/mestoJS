@@ -6,11 +6,11 @@
   background-image: url("../../../images/close.svg");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: auto;
   border: none;
   position: absolute;
-  top: -33px;
-  right: -33px;
+  top: -38px;
+  right: -38px;
   cursor: pointer;
 }
 
@@ -20,6 +20,7 @@
 
 @media screen and (max-width: 640px) {
   .popup__close-button {
+    background-image: url("../../../images/close-button-mobile.svg");
     width: 26px;
     height: 26px;
     top: -40px;
