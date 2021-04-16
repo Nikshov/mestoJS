@@ -7,6 +7,9 @@
   border-radius: 10px;
   position: relative;
   margin: 0 auto;
+  visibility: hidden;
+  opacity: 0;
+  
 }
 
 @media screen and (max-width: 640px) {
