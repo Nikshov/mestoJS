@@ -20,67 +20,54 @@
         <p class="profile__info-about">Исследователь океана</p>
         <button type="button" class="profile__edit-button" aria-label="редактировать информацию в профиле"></button>
       </div>
-      <button type="button" class="profile__add-button" aria-label="описание функции кнопки"></button>
+      <button type="button" class="profile__add-button" aria-label="добавить новое место"></button>
     </section>
     <section class="elements">
-      <article class="element">
-        <img class="element__image" src="./images/Karachaevsk.png" alt="Карачаевск">
-        <div class="element__panel">
-          <h2 class="element__title">Карачаевск</h2>
-          <button type="button" class="element__heart-button" aria-label="описание функции кнопки"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img class="element__image" src="./images/Elbrus.png" alt="гора Эльбрус">
-        <div class="element__panel">
-          <h2 class="element__title">Гора Эльбрус</h2>
-          <button type="button" class="element__heart-button" aria-label="описание функции кнопки"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img class="element__image" src="./images/Dombay.png" alt="Домбай">
-        <div class="element__panel">
-          <h2 class="element__title">Домбай</h2>
-          <button type="button" class="element__heart-button" aria-label="описание функции кнопки"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img class="element__image" src="./images/Elbrus.png" alt="гора Эльбрус">
-        <div class="element__panel">
-          <h2 class="element__title">Гора Эльбрус</h2>
-          <button type="button" class="element__heart-button" aria-label="описание функции кнопки"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img class="element__image" src="./images/Dombay.png" alt="Домбай">
-        <div class="element__panel">
-          <h2 class="element__title">Домбай</h2>
-          <button type="button" class="element__heart-button" aria-label="описание функции кнопки"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img class="element__image" src="./images/Karachaevsk.png" alt="Карачаево-Черкесия">
-        <div class="element__panel">
-          <h2 class="element__title">Карачаево-Черкесия</h2>
-          <button type="button" class="element__heart-button" aria-label="описание функции кнопки"></button>
-        </div>
-      </article>
+      <template class="template-element">
+        <article class="element">
+          <button type="button" class="element__delete-button" aria-label="кнопка 'удалить'"></button>
+          <img class="element__image" src="" alt="">
+          <div class="element__panel">
+            <h2 class="element__title"></h2>
+            <button type="button" class="element__heart-button" aria-label="отметить место как понравившееся"></button>
+          </div>
+        </article>
+      </template>
     </section>
   </main>
   <footer class="footer">
     <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
   </footer>
-  <section class="popup">
+  <div class="popup popup_type_edit-profile">
     <div class="popup__container">
       <button type="button" class="popup__close-button" aria-label="кнопка закрыть"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
       <form name="form" class="popup__form" autocomplete="on">
-      <input type="text" name="name" class="popup__input popup__input_field_name" placeholder="Отображаемое имя"/>
-      <input type="text" name="about" class="popup__input popup__input_field_about" placeholder="деятельность"/>
-      <button type="submit" class="popup__save-button" aria-label="кнопка сохранить">Сохранить</button>
+        <input type="text" name="name" class="popup__input popup__input_field_name" placeholder="Отображаемое имя" />
+        <input type="text" name="about" class="popup__input popup__input_field_about" placeholder="деятельность" />
+        <button type="submit" class="popup__save-button" aria-label="кнопка сохранить">Сохранить</button>
       </form>
     </div>
-  </section>
+  </div>
+  <div class="popup popup_type_add-place">
+    <div class="popup__container">
+      <button type="button" class="popup__close-button" aria-label="кнопка закрыть"></button>
+      <h2 class="popup__title">Новое место</h2>
+      <form name="form" class="popup__form" autocomplete="on">
+        <input type="text" name="name" class="popup__input popup__input_field_place-name" placeholder="Название" />
+        <input type="text" name="about" class="popup__input popup__input_field_image-url"
+          placeholder="Ссылка на картинку" />
+        <button type="submit" class="popup__save-button" aria-label="кнопка создать">Создать</button>
+      </form>
+    </div>
+  </div>
+  <div class="popup popup_type_img-viewer">
+    <div class="popup__viewer">
+      <button type="button" class="popup__close-button popup__close-button_type_img-viewer" aria-label="кнопка закрыть"></button>
+      <img class="popup__img" src="" alt="">
+      <p class="popup__place-name"></p>
+    </div>
+  </div>
   <script src="./scripts/index.js"></script>
 </body>
 

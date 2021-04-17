@@ -10,6 +10,7 @@
   align-self: center;
   opacity: 1;
   cursor: pointer;
+  outline: none;
 }
 
 .element__heart-button:hover {

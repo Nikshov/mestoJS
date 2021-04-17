@@ -8,10 +8,10 @@
   background-color: transparent;
   padding: 0;
   border: 1px solid #ffffff;
-  /* margin-left: 18px; */
   grid-column: 2 / 3;
   grid-row: 2 / -1;
   cursor: pointer;
+  outline: none;
 }
 
 .profile__edit-button:hover {
