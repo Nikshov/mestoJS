@@ -43,8 +43,8 @@ const popupViewer = document.querySelector('.popup_type_img-viewer');
 const closeViewerButton = popupViewer.querySelector('.popup__close-button');
 
 function buildPopupEdit() {
-  openPopup(popupEditProfile);
   fillPopupEdit();
+  openPopup(popupEditProfile);
 }
 
 function fillPopupEdit() {
@@ -52,7 +52,7 @@ function fillPopupEdit() {
   inputAbout.value = profileAbout.textContent;
 };
 
-function editSubmit(evt) {
+function handleEditFormSubmit(evt) {
   evt.preventDefault();
 
   profileName.textContent = inputName.value;
@@ -69,18 +69,15 @@ function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
 
-function addSubmit(evt) {
+function handleAddFormSubmit(evt) {
   evt.preventDefault();
 
-  addElement(inputPlaceName.value, inputImgUrl.value);
+  renderCard(createCard(inputPlaceName.value, inputImgUrl.value));
 
-  inputPlaceName.value = '';
-  inputImgUrl.value = '';
-
-  closePopup(popupAddPlace);
+  closePopupAddPlace();
 }
 
-function addElement(placeName, imgUrl) {
+function createCard(placeName, imgUrl) {
   const template = document.querySelector('.template-element').content;
   const newElement = template.querySelector('.element').cloneNode(true);
   const elementTitle = newElement.querySelector('.element__title');
@@ -94,10 +91,12 @@ function addElement(placeName, imgUrl) {
 
   heartButton.addEventListener('click', () => heartButton.classList.toggle('element__heart-button_active'));
   deleteButton.addEventListener('click', () => newElement.remove());
-  elementImage.addEventListener('click', { handleEvent(event) { buildPopupViewer(event.srcElement.alt, event.srcElement.currentSrc) } });
+  elementImage.addEventListener('click', () => buildPopupViewer(elementImage.alt, elementImage.src));
 
-  places.prepend(newElement);
+  return newElement;
 }
+
+function renderCard(obj) { places.prepend(obj) }
 
 function buildPopupViewer(placeName, imgUrl) {
   const img = popupViewer.querySelector('.popup__img');
@@ -108,11 +107,16 @@ function buildPopupViewer(placeName, imgUrl) {
   openPopup(popupViewer);
 }
 
-addButton.addEventListener('click', { handleEvent(event) { openPopup(popupAddPlace) } });
-closeAddButton.addEventListener('click', { handleEvent(event) { closePopup(popupAddPlace) } });
-closeViewerButton.addEventListener('click', { handleEvent(event) { closePopup(popupViewer) } });
-closeEditButton.addEventListener('click', { handleEvent(event) { closePopup(popupEditProfile) } });
+function closePopupAddPlace() {
+  closePopup(popupAddPlace);
+  formAdd.reset();
+}
+
+addButton.addEventListener('click', () => openPopup(popupAddPlace));
+closeAddButton.addEventListener('click', closePopupAddPlace);
+closeViewerButton.addEventListener('click', () => closePopup(popupViewer));
+closeEditButton.addEventListener('click', () => closePopup(popupEditProfile));
 editButton.addEventListener('click', buildPopupEdit);
-formEdit.addEventListener('submit', editSubmit);
-formAdd.addEventListener('submit', addSubmit);
-window.onload = initialCards.forEach((obj) => addElement(obj.name, obj.link));
+formEdit.addEventListener('submit', handleEditFormSubmit);
+formAdd.addEventListener('submit', handleAddFormSubmit);
+window.onload = initialCards.forEach((obj) => renderCard(createCard(obj.name, obj.link)));
