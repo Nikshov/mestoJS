@@ -34,3 +34,9 @@
 @import url("../blocks/popup/__close-button/_type/_img-viewer/popup__close-button_type_img-viewer.css");
 @import url("../blocks/popup/__img/popup__img.css");
 @import url("../blocks/popup/__place-name/popup__place-name.css");
+
+@import url("../blocks/popup/__input/_type/popup__input_type_error.css");
+@import url("../blocks/popup/__input-error/popup__input-error.css");
+@import url("../blocks/popup/__save-button/_disabled/popup__save-button_disabled.css");
+
+@import url("../blocks/popup/__input-error/_active/popup__input-error_active.css");

@@ -24,6 +24,7 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const inputName = popupEditProfile.querySelector('.popup__input_field_name');
 const inputAbout = popupEditProfile.querySelector('.popup__input_field_about');
@@ -120,3 +121,29 @@ editButton.addEventListener('click', buildPopupEdit);
 formEdit.addEventListener('submit', handleEditFormSubmit);
 formAdd.addEventListener('submit', handleAddFormSubmit);
 window.onload = initialCards.forEach((obj) => renderCard(createCard(obj.name, obj.link)));
+
+function isPopupOpen() {
+  if (popupIsOpened = document.querySelector('.popup_opened')) return true;
+  return false;
+}
+function checkPressedKey(evt) {
+  if (evt.key === 'Escape') return true;
+  return false;
+  };
+  
+document.addEventListener('keydown', (evt) => {
+    if (isPopupOpen() && checkPressedKey(evt)) {
+    const popupIsOpened = document.querySelector('.popup_opened');
+    closePopup(popupIsOpened);
+    }
+  });
+document.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains("popup")) {
+    const popupIsOpened = document.querySelector('.popup_opened');
+    closePopup(popupIsOpened);
+  }});
+
+
+
+
+// Тут еще много чего можно порефакторить и добавть, но пока что отправляю хотяб с выполненым 6 спринтом
