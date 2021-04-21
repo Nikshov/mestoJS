@@ -51,7 +51,7 @@ function buildPopupEdit() {
 function fillPopupEdit() {
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
-};
+}
 
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
@@ -64,10 +64,16 @@ function handleEditFormSubmit(evt) {
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', handleEscClosePopup);
+  document.removeEventListener('click', handleClickClosePopup);
+  clearErrors.bind(popup)();
+  formAdd.reset();
 }
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', handleEscClosePopup);
+  document.addEventListener('click', handleClickClosePopup);
 }
 
 function handleAddFormSubmit(evt) {
@@ -75,7 +81,7 @@ function handleAddFormSubmit(evt) {
 
   renderCard(createCard(inputPlaceName.value, inputImgUrl.value));
 
-  closePopupAddPlace();
+  closePopup(popupAddPlace);
 }
 
 function createCard(placeName, imgUrl) {
@@ -108,42 +114,40 @@ function buildPopupViewer(placeName, imgUrl) {
   openPopup(popupViewer);
 }
 
-function closePopupAddPlace() {
-  closePopup(popupAddPlace);
-  formAdd.reset();
+function handleClickClosePopup(event) {
+  if (checkClickArea(event)) {
+    const popupIsOpened = document.querySelector('.popup_opened');
+    closePopup(popupIsOpened);
+  }
+}
+
+function handleEscClosePopup(event) {
+  if (checkPressedKey(event)) {
+    const popupIsOpened = document.querySelector('.popup_opened');
+    closePopup(popupIsOpened);
+  }
+}
+
+function checkPressedKey(event) {
+  if (event.key === 'Escape') return true;
+}
+
+function checkClickArea(event) {
+  if (event.target.classList.contains("popup")) return true;
+}
+
+function clearErrors() {
+  const errorTexts = this.querySelectorAll('.popup__input-error');
+  const error = this.querySelectorAll('.popup__input_type_error');
+  error.forEach((item) => item.classList.remove('popup__input_type_error'));
+  errorTexts.forEach((item) => item.classList.remove('popup__input-error_active'));
 }
 
 addButton.addEventListener('click', () => openPopup(popupAddPlace));
-closeAddButton.addEventListener('click', closePopupAddPlace);
+closeAddButton.addEventListener('click', () => closePopup(popupAddPlace));
 closeViewerButton.addEventListener('click', () => closePopup(popupViewer));
 closeEditButton.addEventListener('click', () => closePopup(popupEditProfile));
 editButton.addEventListener('click', buildPopupEdit);
 formEdit.addEventListener('submit', handleEditFormSubmit);
 formAdd.addEventListener('submit', handleAddFormSubmit);
 window.onload = initialCards.forEach((obj) => renderCard(createCard(obj.name, obj.link)));
-
-function isPopupOpen() {
-  if (popupIsOpened = document.querySelector('.popup_opened')) return true;
-  return false;
-}
-function checkPressedKey(evt) {
-  if (evt.key === 'Escape') return true;
-  return false;
-  };
-  
-document.addEventListener('keydown', (evt) => {
-    if (isPopupOpen() && checkPressedKey(evt)) {
-    const popupIsOpened = document.querySelector('.popup_opened');
-    closePopup(popupIsOpened);
-    }
-  });
-document.addEventListener('click', (evt) => {
-  if (evt.target.classList.contains("popup")) {
-    const popupIsOpened = document.querySelector('.popup_opened');
-    closePopup(popupIsOpened);
-  }});
-
-
-
-
-// Тут еще много чего можно порефакторить и добавть, но пока что отправляю хотяб с выполненым 6 спринтом
