@@ -66,7 +66,7 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', handleEscClosePopup);
   document.removeEventListener('click', handleClickClosePopup);
-  clearErrors.bind(popup)();
+  clearErrors.bind(popup)();  //Не знаю что мне ударило в голову, что я решил через this + bind() эту функцию запилить.
   formAdd.reset();
 }
 
