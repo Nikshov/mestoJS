@@ -12,14 +12,14 @@ function showInputError(formElement, inputElement, errorMessage, obj) {
   inputElement.classList.add(obj.inputError);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(obj.errorClass);
-};
+}
 
 function hideInputError(formElement, inputElement, obj) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(obj.inputError);
   errorElement.classList.remove(obj.errorClass);
   errorElement.textContent = '';
-};
+}
 
 function checkInputValidity(formElement, inputElement, obj) {
   if (!inputElement.validity.valid) {
@@ -27,7 +27,7 @@ function checkInputValidity(formElement, inputElement, obj) {
   } else {
     hideInputError(formElement, inputElement, obj);
   }
-};
+}
 
 function setEventListeners(formElement, obj) {
   const inputList = Array.from(formElement.querySelectorAll(obj.inputSelector));
@@ -39,7 +39,7 @@ function setEventListeners(formElement, obj) {
       toggleButtonState(inputList, buttonElement, obj);
     });
   });
-};
+}
 
 function enableValidation(obj) {
   const formList = Array.from(document.querySelectorAll(obj.formSelector));
@@ -49,10 +49,7 @@ function enableValidation(obj) {
     });
     setEventListeners(formElement, obj);
   });
-};
-
-
-
+}
 
 function hasInvalidInput(inputList) {
   return inputList.some((inputElement) => {
