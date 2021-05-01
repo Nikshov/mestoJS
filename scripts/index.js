@@ -1,30 +1,3 @@
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const inputName = popupEditProfile.querySelector('.popup__input_field_name');
 const inputAbout = popupEditProfile.querySelector('.popup__input_field_about');
@@ -45,6 +18,7 @@ const closeViewerButton = popupViewer.querySelector('.popup__close-button');
 const img = popupViewer.querySelector('.popup__img');
 const imgName = popupViewer.querySelector('.popup__place-name');
 const buttonSavePlace = popupAddPlace.querySelector('.popup__save-button');
+
 
 function hidePopup(popup) {
   popup.classList.remove('popup_opened');
@@ -72,17 +46,6 @@ function fillPopupEdit() {
 function openPopup(popup) {
   addClosePopupListener();
   showPopup(popup);
-  switch (popup) {
-    case popupEditProfile:
-      fillPopupEdit();
-      clearErrors(popup);
-      break;
-    case popupAddPlace:
-      formAdd.reset();
-      buttonSavePlace.classList.add('popup__save-button_disabled');
-      clearErrors(popup);
-      break;
-  }
 }
 
 function closePopup(popup) {
@@ -157,18 +120,34 @@ function checkClickArea(event) {
   if (event.target.classList.contains("popup")) return true;
 }
 
-function clearErrors(popup) {
+/* function clearErrors(popup) {
   const errorTexts = popup.querySelectorAll('.popup__input-error');
   const error = popup.querySelectorAll('.popup__input_type_error');
   error.forEach((item) => item.classList.remove('popup__input_type_error'));
   errorTexts.forEach((item) => item.classList.remove('popup__input-error_active'));
+} */
+
+function handleEditButton() {
+  fillPopupEdit();
+  /* clearErrors(popup); */ // Похожая функция уже есть в validate.js, поэтому воспользовался ей.
+  hideInputError(formEdit, inputName, validationConfig);
+  hideInputError(formEdit, inputAbout, validationConfig);
+  openPopup(popupEditProfile);
 }
 
-addButton.addEventListener('click', () => openPopup(popupAddPlace));
+function handleAddButton() {
+  formAdd.reset();
+  buttonSavePlace.classList.add('popup__save-button_disabled');
+  hideInputError(formAdd, inputPlaceName, validationConfig);
+  hideInputError(formAdd, inputImgUrl, validationConfig);
+  openPopup(popupAddPlace);
+}
+
+addButton.addEventListener('click', handleAddButton);
 closeAddButton.addEventListener('click', () => closePopup(popupAddPlace));
 closeViewerButton.addEventListener('click', () => closePopup(popupViewer));
 closeEditButton.addEventListener('click', () => closePopup(popupEditProfile));
-editButton.addEventListener('click', () => openPopup(popupEditProfile));
+editButton.addEventListener('click', handleEditButton);
 formEdit.addEventListener('submit', handleEditFormSubmit);
 formAdd.addEventListener('submit', handleAddFormSubmit);
 window.onload = initialCards.forEach((obj) => renderCard(createCard(obj.name, obj.link)));
