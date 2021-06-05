@@ -1,8 +1,8 @@
 import { openPopup } from './index.js';
 export class Card {
-  constructor(name, img, templateSelector) {
-    this._name = name;
-    this._img = img;
+  constructor(data, templateSelector) {
+    this._name = data.name;
+    this._img = data.img;
     this._templateSelector = templateSelector;
   }
 
@@ -14,7 +14,7 @@ export class Card {
     this._element = this._getTemplate();
     this._fillElement();
     this._addEventListeners()
-    this._renderCard();
+    return this._element;
   }
 
   _fillElement() {
@@ -25,10 +25,24 @@ export class Card {
   }
 
   _addEventListeners() {
-    const heartButton = this._element.querySelector('.element__heart-button');
-    heartButton.addEventListener('click', () => heartButton.classList.toggle('element__heart-button_active'));
-    this._element.querySelector('.element__delete-button').addEventListener('click', () => this._element.remove());
-    this._elementImg.addEventListener('click', () => this._openViewer());
+    this._heartButton = this._element.querySelector('.element__heart-button');
+    this._heartButton.addEventListener('click', () => this._handleHeartButton());
+    this._deleteButton = this._element.querySelector('.element__delete-button');
+    this._deleteButton.addEventListener('click', () => this._handleDeleteButton());
+    this._elementImg.addEventListener('click', () => this._handleClickImg());
+  }
+
+  _handleClickImg() {
+    this._openViewer()
+  }
+
+  _handleDeleteButton() {
+    this._element.remove();
+    this._element = null;
+  }
+
+  _handleHeartButton() {
+    this._heartButton.classList.toggle('element__heart-button_active');
   }
 
   _openViewer() {
@@ -44,5 +58,4 @@ export class Card {
     imgName.textContent = this._name;
   }
 
-  _renderCard() { document.querySelector('.elements').prepend(this._element) };
 }

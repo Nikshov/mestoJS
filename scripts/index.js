@@ -11,15 +11,12 @@ const closeEditButton = popupEditProfile.querySelector('.popup__close-button');
 const formEdit = popupEditProfile.querySelector('.popup__form');
 const popupAddPlace = document.querySelector('.popup_type_add-place');
 const formAdd = popupAddPlace.querySelector('.popup__form');
-// const places = document.querySelector('.elements');
 const inputPlaceName = popupAddPlace.querySelector('.popup__input_field_place-name');
 const inputImgUrl = popupAddPlace.querySelector('.popup__input_field_image-url');
 const addButton = document.querySelector('.profile__add-button');
 const closeAddButton = popupAddPlace.querySelector('.popup__close-button');
 const popupViewer = document.querySelector('.popup_type_img-viewer');
 const closeViewerButton = popupViewer.querySelector('.popup__close-button');
-// const img = popupViewer.querySelector('.popup__img');
-// const imgName = popupViewer.querySelector('.popup__place-name');
 const buttonSavePlace = popupAddPlace.querySelector('.popup__save-button');
 
 
@@ -73,16 +70,21 @@ function closePopup(popup) {
   hidePopup(popup);
 }
 
-function generateNewCard(name, url) {
-  const newCard = new Card(name, url, ".template-element");
-  newCard.generateCard();
+function generateNewCard(data) {
+  const newCard = new Card(data, ".template-element");
+  document.querySelector('.elements').prepend(newCard.generateCard());
 }
 
 function handleAddFormSubmit(evt) {
   evt.preventDefault();
 
   if (!formAdd.checkValidity()) return;
-  generateNewCard(inputPlaceName.value, inputImgUrl.value);
+  const data = {
+    name: inputPlaceName.value,
+    img: inputImgUrl.value
+  }
+  generateNewCard(data);
+
   closePopup(popupAddPlace);
 }
 
@@ -122,12 +124,13 @@ function checkClickArea(event) {
 function handleEditButton() {
   fillPopupEdit();
   formEditValidator.clearErrors();
+  formEditValidator.toggleButtonState();
   openPopup(popupEditProfile);
 }
 
 function handleAddButton() {
   formAdd.reset();
-  buttonSavePlace.classList.add('popup__save-button_disabled');
+  formAddValidator.toggleButtonState();
   formAddValidator.clearErrors();
   openPopup(popupAddPlace);
 }
@@ -141,4 +144,4 @@ closeEditButton.addEventListener('click', () => closePopup(popupEditProfile));
 editButton.addEventListener('click', handleEditButton);
 formEdit.addEventListener('submit', handleEditFormSubmit);
 formAdd.addEventListener('submit', handleAddFormSubmit);
-window.onload = initialCards.forEach((obj) => generateNewCard(obj.name, obj.link));
+window.onload = initialCards.forEach((data) => generateNewCard(data));
