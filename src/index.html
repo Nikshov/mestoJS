@@ -5,16 +5,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mesto</title>
-  <link rel="stylesheet" href="./pages/index.css">
 </head>
 
 <body class="body">
   <header class="header">
-    <img class="logo" alt="логотип Mesto" src="./images/logo.svg">
+    <img class="logo" alt="логотип Mesto" src="<%=require('./images/logo.svg')%>">
   </header>
   <main>
     <section class="profile">
-      <img class="profile__avatar" src="./images/Jacques.png" alt="Фотография профиля">
+      <img class="profile__avatar" src="<%=require('./images/Jacques.png')%>" alt="Фотография профиля">
       <div class="profile__info">
         <h1 class="profile__info-name">Жак-Ив Кусто</h1>
         <p class="profile__info-about">Исследователь океана</p>
@@ -58,10 +57,10 @@
       <button type="button" class="popup__close-button" aria-label="кнопка закрыть"></button>
       <h2 class="popup__title">Новое место</h2>
       <form name="form" class="popup__form" autocomplete="on" novalidate>
-        <input type="text" id="title-input" name="title" class="popup__input popup__input_field_place-name"
+        <input type="text" id="title-input" name="name" class="popup__input popup__input_field_place-name"
           placeholder="Название" minlength="2" maxlength="30" required />
         <span class="popup__input-error popup__input-error_type_title title-input-error"></span>
-        <input type="url" id="url-input" name="url" class="popup__input popup__input_field_image-url"
+        <input type="url" id="url-input" name="img" class="popup__input popup__input_field_image-url"
           placeholder="Ссылка на картинку" required />
         <span class="popup__input-error popup__input-error_type_url url-input-error"></span>
         <button type="submit" class="popup__save-button" aria-label="кнопка создать">Создать</button>
@@ -76,7 +75,6 @@
       <p class="popup__place-name"></p>
     </div>
   </div>
-  <script type="module" src="./scripts/index.js"></script>
 </body>
 
 </html>
