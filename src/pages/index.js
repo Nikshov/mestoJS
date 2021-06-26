@@ -19,14 +19,12 @@ function handleEditButton() {
   const userInfo = user.getUserInfo();
   inputName.value = userInfo.name;
   inputAbout.value = userInfo.about;
-  formEditValidator.clearErrors();
-  formEditValidator.toggleButtonState();
+  formEditValidator.resetValidation();
   popupEdit.open();
 }
 
 function handleAddButton() {
-  formAddValidator.toggleButtonState();
-  formAddValidator.clearErrors();
+  formAddValidator.resetValidation();
   popupAdd.open();
 }
 
@@ -41,30 +39,13 @@ viewer.setEventListeners();
 
 const defaultCards = new Section({
   items: initialCards,
-  renderer: (item) => {
-    const card = new Card(item, templateSelector, () => {
-      viewer.open(item.name, item.img);
-    });
-    const element = card.generateCard();
-    defaultCards.addItem(element);
-  }
-}, cardsContainer);
-
-
-const addCards = new Section({
-  data: []
+  renderer: (item) => defaultCards.addItem(createCard(item))
 }, cardsContainer);
 
 
 const popupAdd = new PopupWithForm(
   '.popup_type_add-place',
-  (item) => {
-    const card = new Card(item, templateSelector, () => {
-      viewer.open(item.name, item.img);
-    });
-    const element = card.generateCard();
-    addCards.addItem(element);
-  }
+  (item) => defaultCards.addItem(createCard(item))
 );
 
 popupAdd.setEventListeners();
@@ -82,5 +63,14 @@ const popupEdit = new PopupWithForm(
 );
 
 popupEdit.setEventListeners();
+
+
+function createCard(obj) {
+  const card = new Card(obj, templateSelector, () => {
+    viewer.open(obj.name, obj.img);
+  });
+  const element = card.generateCard();
+  return element;
+}
 
 window.onload = defaultCards.renderItems();
