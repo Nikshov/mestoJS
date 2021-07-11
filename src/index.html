@@ -13,7 +13,9 @@
   </header>
   <main>
     <section class="profile">
+      <div class="profile__avatar-container">
       <img class="profile__avatar" src="<%=require('./images/Jacques.png')%>" alt="Фотография профиля">
+      </div>
       <div class="profile__info">
         <h1 class="profile__info-name">Жак-Ив Кусто</h1>
         <p class="profile__info-about">Исследователь океана</p>
@@ -28,7 +30,11 @@
           <img class="element__image" src="#" alt="картинка">
           <div class="element__panel">
             <h2 class="element__title"></h2>
-            <button type="button" class="element__heart-button" aria-label="отметить место как понравившееся"></button>
+            <div class="element__likes">
+              <button type="button" class="element__heart-button"
+                aria-label="отметить место как понравившееся"></button>
+              <p class="element__amount-likes">0</p>
+            </div>
           </div>
         </article>
       </template>
@@ -60,7 +66,7 @@
         <input type="text" id="title-input" name="name" class="popup__input popup__input_field_place-name"
           placeholder="Название" minlength="2" maxlength="30" required />
         <span class="popup__input-error popup__input-error_type_title title-input-error"></span>
-        <input type="url" id="url-input" name="img" class="popup__input popup__input_field_image-url"
+        <input type="url" id="url-input" name="link" class="popup__input popup__input_field_image-url"
           placeholder="Ссылка на картинку" required />
         <span class="popup__input-error popup__input-error_type_url url-input-error"></span>
         <button type="submit" class="popup__save-button" aria-label="кнопка создать">Создать</button>
@@ -73,6 +79,29 @@
         aria-label="кнопка закрыть"></button>
       <img class="popup__img" src="#" alt="картинка">
       <p class="popup__place-name"></p>
+    </div>
+  </div>
+
+  <div class="popup popup_type_confirm">
+    <div class="popup__container">
+      <button type="button" class="popup__close-button" aria-label="кнопка закрыть"></button>
+      <h2 class="popup__title">Вы уверены?</h2>
+      <form name="form" class="popup__form">
+        <button type="submit" class="popup__save-button" aria-label="кнопка подтверждения">Да</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="popup popup_type_editAvatar">
+    <div class="popup__container">
+      <button type="button" class="popup__close-button" aria-label="кнопка закрыть"></button>
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form name="popup-form" class="popup__form" novalidate>
+        <input type="url" name="link" required  placeholder="Ссылка на картинку" class="popup__input popup__input_field_image-url"
+          id="url-input"/>
+        <span class="popup__input-error popup__input-error_type_url url-input-error"></span>
+        <button type="submit" class="popup__save-button">Сохранить</button>
+      </form>
     </div>
   </div>
 </body>

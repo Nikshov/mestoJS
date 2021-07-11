@@ -42,3 +42,5 @@
 @import url("../blocks/popup/__input-error/_type/popup__input-error_type_name.css");
 @import url("../blocks/popup/__input-error/_type/popup__input-error_type_title.css");
 @import url("../blocks/popup/__input-error/_type/popup__input-error_type_url.css");
+@import url("../blocks/element/__amount-likes/element__amount-likes.css");
+@import url("../blocks/profile/__avatar-container/profile__avatar-container.css");

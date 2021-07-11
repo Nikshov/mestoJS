@@ -43,3 +43,6 @@ export const formAdd = popupAddPlace.querySelector('.popup__form');
 export const addButton = document.querySelector('.profile__add-button'); 
 export const templateSelector = '.template-element'; 
 export const cardsContainer = '.elements'; 
+const popupEditAvatar = document.querySelector('.popup_type_editAvatar');
+export const formAvatar = popupEditAvatar.querySelector('.popup__form');
+export const avatarButton = document.querySelector('.profile__avatar-container');
