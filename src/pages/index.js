@@ -168,10 +168,6 @@ const popupConfirm = new PopupWithConfirm({
 popupConfirm.setEventListeners();
 
 
-
-
-
-
 window.onload = () => {
   Promise.all([api.getUserInfo(), api.getInitialCards()])
     .then(res => {
